@@ -814,4 +814,86 @@
                     id: 'documents',
                     question: 'ما هي الوثائق المطلوبة؟',
                     icon: 'fa-file-alt',
-                    answer: 'الوثائق المطلوبة للانخراط:\n📄 صورة من بطاقة التعريف الوطنية (أو شهادة ميلاد)\n📄 صورتان شمسيتان\n📄 شهادة طبية حديثة\n📄 موافقة ولي الأمر (للقاصرين)\
+                    answer: 'الوثائق المطلوبة للانخراط:\n📄 صورة من بطاقة التعريف الوطنية (أو شهادة ميلاد)\n📄 صورتان شمسيتان\n📄 شهادة طبية حديثة\n📄 موافقة ولي الأمر (للقاصرين)\n\nتُسلَّم هذه الوثائق بعد تأكيد التسجيل.'
+                },
+                {
+                    id: 'sfax_details',
+                    question: 'ما يميز فوج الحدائق في صفاقس؟',
+                    icon: 'fa-star',
+                    answer: 'فوج الحدائق بصفاقس - حي jardin يتميز بـ:\n✅ قادة ذوو خبرة عالية\n✅ أنشطة أسبوعية منتظمة\n✅ مخيمات صيفية وشتوية\n✅ تعليم المهارات الحياتية\n✅ روح العائلة الكشفية\n\nانضم إلينا وكن جزءاً من التاريخ! ⚜️'
+                },
+                {
+                    id: 'thanks',
+                    question: 'شكراً على المساعدة',
+                    icon: 'fa-heart',
+                    answer: 'على الرحب والسعة! نحن سعداء بخدمتك. إذا كان لديك أي سؤال آخر، فقط اختر من الأسئلة أعلاه. بالتوفيق في رحلتك الكشفية! 🌟'
+                }
+            ];
+
+            // ---------- RENDER QUICK REPLY BUTTONS ----------
+            function renderQuickReplies() {
+                // Keep the label
+                quickRepliesContainer.innerHTML = '<div class="replies-label"><i class="fas fa-lightbulb"></i> اختر سؤالاً:</div>';
+                knowledgeBase.forEach(item => {
+                    const btn = document.createElement('button');
+                    btn.setAttribute('data-id', item.id);
+                    btn.innerHTML = `<i class="fas ${item.icon}"></i> ${item.question}`;
+                    quickRepliesContainer.appendChild(btn);
+                });
+            }
+
+            // ---------- ADD MESSAGE ----------
+            function addMessage(text, sender) {
+                const msgDiv = document.createElement('div');
+                msgDiv.classList.add('ai-message', sender);
+                msgDiv.innerHTML = text.replace(/\n/g, '<br>');
+                aiMessages.appendChild(msgDiv);
+                aiMessages.scrollTop = aiMessages.scrollHeight;
+            }
+
+            // ---------- HANDLE QUESTION SELECTION ----------
+            function handleQuestion(id) {
+                const item = knowledgeBase.find(q => q.id === id);
+                if (!item) return;
+
+                // Add user message (the question)
+                addMessage(`❓ ${item.question}`, 'user');
+
+                // Add bot answer after short delay
+                setTimeout(() => {
+                    addMessage(item.answer, 'bot');
+                }, 350);
+            }
+
+            // ---------- EVENT LISTENERS ----------
+            aiToggle.addEventListener('click', () => {
+                aiWindow.classList.toggle('active');
+            });
+
+            aiClose.addEventListener('click', () => {
+                aiWindow.classList.remove('active');
+            });
+
+            // Use event delegation for quick reply buttons
+            quickRepliesContainer.addEventListener('click', (e) => {
+                const btn = e.target.closest('button');
+                if (!btn) return;
+                const id = btn.getAttribute('data-id');
+                if (id) handleQuestion(id);
+            });
+
+            // ---------- INIT ----------
+            renderQuickReplies();
+
+            // Welcome message
+            window.addEventListener('load', () => {
+                setTimeout(() => {
+                    addMessage('مرحباً بك في فوج الحدائق للكشافة التونسية - صفاقس (حي jardin)! 🏕️\nاختر أحد الأسئلة أدناه لمساعدتك في الانخراط.', 'bot');
+                }, 500);
+            });
+
+        })();
+    </script>
+
+</body>
+</html>
