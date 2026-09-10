@@ -4,16 +4,20 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>تسجيل انخراط - فوج الحدائق للكشافة التونسية</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    <!-- Google Fonts for beautiful Arabic typography + extra luxe fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&family=Amiri:ital,wght@0,400;0,700;1,400&family=Marcellus&display=swap" rel="stylesheet">
     
     <style>
         :root {
-            --primary-green: #1a3c2d;
-            --primary-red: #d32f2f;
-            --primary-gold: #c59b4b;
+            --primary-green: #0f2e1f;      /* deep luxurious forest green */
+            --primary-red: #b22222;        /* rich tunisian red */
+            --primary-gold: #c59b4b;       /* antique gold */
+            --gold-light: #e6d2a8;         /* soft gold for highlights */
             --bg-light-green: #eaf2ec;
             --bg-sand: #fdfbf7;
-            --text-dark: #2c3e35;
+            --text-dark: #1e2b23;
+            --tunisian-blue: #1e4b6e;      /* subtle tunisian tile blue */
+            --tunisian-terracotta: #b35e2e;
         }
 
         * {
@@ -23,38 +27,39 @@
             font-family: 'Cairo', sans-serif;
         }
 
-        html, body {
-            width: 100%;
-            min-height: 100%;
-        }
-
         body {
-            background-color: #eaf2ec;
+            /* LUXURIOUS TUNISIAN BACKGROUND: sand, zellige pattern, subtle gold */
+            background-color: var(--bg-sand);
             background-image: 
-                radial-gradient(circle at 15% 50%, rgba(26, 60, 45, 0.08) 0%, transparent 45%),
-                radial-gradient(circle at 85% 30%, rgba(197, 155, 75, 0.10) 0%, transparent 45%),
-                linear-gradient(135deg, #fdfbf7 0%, #eaf2ec 100%);
-            background-repeat: no-repeat;
-            background-size: cover;
+                /* Tunisian tile / zellige inspired pattern */
+                radial-gradient(circle at 20% 30%, rgba(197, 155, 75, 0.08) 0%, transparent 30%),
+                radial-gradient(circle at 80% 70%, rgba(30, 75, 110, 0.06) 0%, transparent 35%),
+                /* geometric star pattern (sidi bou said) */
+                repeating-linear-gradient(45deg, rgba(197, 155, 75, 0.02) 0px, rgba(197, 155, 75, 0.02) 2px, 
+                                          transparent 2px, transparent 8px),
+                repeating-linear-gradient(135deg, rgba(179, 94, 46, 0.02) 0px, rgba(179, 94, 46, 0.02) 2px, 
+                                          transparent 2px, transparent 8px),
+                linear-gradient(145deg, #fdfbf7 0%, #f5efe6 100%);
             background-attachment: fixed;
             min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-            padding: 20px;
+            padding: 24px 16px;
             position: relative;
         }
 
+        /* Delicate Tunisian star overlay (zellige feel) */
         body::before {
             content: "";
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-image: radial-gradient(#1a3c2d 1px, transparent 1px);
-            background-size: 30px 30px;
-            opacity: 0.05;
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                radial-gradient(circle at 10% 20%, var(--primary-gold) 1px, transparent 1px),
+                radial-gradient(circle at 90% 80%, var(--tunisian-blue) 1px, transparent 1px),
+                radial-gradient(circle at 40% 60%, var(--primary-red) 0.8px, transparent 0.8px);
+            background-size: 80px 80px, 120px 120px, 200px 200px;
+            opacity: 0.12;
             pointer-events: none;
             z-index: 0;
         }
@@ -62,164 +67,349 @@
         .container {
             background-color: #ffffff;
             width: 100%;
-            max-width: 600px;
-            border-radius: 15px;
-            box-shadow: 0 20px 40px rgba(26, 60, 45, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05);
+            max-width: 620px;
+            border-radius: 24px;
+            box-shadow: 
+                0 30px 50px -15px rgba(15, 46, 31, 0.3),
+                0 0 0 1px rgba(197, 155, 75, 0.25),
+                0 10px 20px -5px rgba(0, 0, 0, 0.1),
+                inset 0 1px 0 rgba(255,255,255,0.8);
             overflow: hidden;
             position: relative;
             z-index: 1;
-            border-top: 8px solid var(--primary-green);
-            border-bottom: 4px solid var(--primary-gold);
+            border-top: 8px solid var(--primary-gold);
+            border-bottom: 6px solid var(--primary-green);
+            transition: box-shadow 0.3s ease;
+        }
+
+        .container:hover {
+            box-shadow: 
+                0 35px 60px -12px rgba(15, 46, 31, 0.4),
+                0 0 0 1px rgba(197, 155, 75, 0.5),
+                0 10px 25px -3px rgba(0, 0, 0, 0.15);
+        }
+
+        /* GOLD AND GREEN ORNAMENTAL BORDER — TUNISIAN CRAFTSMANSHIP */
+        .container::before,
+        .container::after {
+            content: '';
+            position: absolute;
+            width: 120px;
+            height: 120px;
+            border: 2px solid var(--primary-gold);
+            opacity: 0.25;
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        .container::before {
+            top: 15px;
+            right: 15px;
+            border-left: none;
+            border-bottom: none;
+            border-radius: 0 20px 0 0;
+        }
+
+        .container::after {
+            bottom: 15px;
+            left: 15px;
+            border-right: none;
+            border-top: none;
+            border-radius: 0 0 0 20px;
         }
 
         .header {
             text-align: center;
-            padding: 35px 20px 15px;
-            background-color: #fff;
+            padding: 45px 30px 25px;
+            background: linear-gradient(180deg, #ffffff 0%, #faf8f4 100%);
             position: relative;
+            border-bottom: 1px solid rgba(197, 155, 75, 0.3);
         }
 
+        /* Decorative Tunisian star / arabesque line */
         .header::after {
-            content: '';
+            content: '✦ ✦ ✦';
             position: absolute;
-            bottom: 0;
+            bottom: -12px;
             left: 50%;
             transform: translateX(-50%);
-            width: 80%;
-            height: 1px;
-            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
-            opacity: 0.5;
+            background: #ffffff;
+            padding: 0 20px;
+            color: var(--primary-gold);
+            font-size: 14px;
+            letter-spacing: 6px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.05);
         }
 
         .header img {
-            max-width: 230px;
+            max-width: 220px;
             height: auto;
-            margin-bottom: 20px;
-            filter: drop-shadow(0px 8px 15px rgba(0,0,0,0.12));
-            transition: transform 0.3s ease;
+            margin-bottom: 22px;
+            filter: drop-shadow(0px 10px 18px rgba(15, 46, 31, 0.18));
+            transition: transform 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+            border-radius: 50%;
+            border: 3px solid var(--primary-gold);
+            padding: 6px;
+            background: #fff;
         }
 
         .header img:hover {
-            transform: scale(1.02);
+            transform: scale(1.03) rotate(0.5deg);
+            border-color: var(--primary-red);
         }
 
         .header h1 {
             color: var(--primary-green);
-            font-size: 26px;
+            font-size: 29px;
             font-weight: 900;
-            margin-bottom: 5px;
+            margin-bottom: 6px;
+            letter-spacing: -0.5px;
+            text-shadow: 0 2px 4px rgba(197, 155, 75, 0.15);
+            font-family: 'Amiri', 'Cairo', serif;
         }
 
         .header h2 {
             color: var(--primary-gold);
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
-            letter-spacing: 0.5px;
+            letter-spacing: 1px;
+            text-transform: uppercase;
+            background: linear-gradient(135deg, #c59b4b, #b38633);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-shadow: 0 1px 2px rgba(255,255,255,0.5);
+            font-family: 'Cairo', sans-serif;
         }
 
         .form-body {
-            padding: 30px 40px 40px;
+            padding: 35px 40px 45px;
             background-color: #ffffff;
+            position: relative;
+        }
+
+        /* subtle tunisian tile pattern inside form body */
+        .form-body::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0; right: 0; bottom: 0;
+            background-image: 
+                linear-gradient(45deg, rgba(197, 155, 75, 0.02) 25%, transparent 25%,
+                                transparent 75%, rgba(197, 155, 75, 0.02) 75%),
+                linear-gradient(-45deg, rgba(197, 155, 75, 0.02) 25%, transparent 25%,
+                                transparent 75%, rgba(197, 155, 75, 0.02) 75%);
+            background-size: 40px 40px;
+            pointer-events: none;
+            opacity: 0.6;
         }
 
         .form-group {
-            margin-bottom: 22px;
+            margin-bottom: 26px;
             position: relative;
+            z-index: 1;
         }
 
         .form-group label {
             display: block;
-            margin-bottom: 8px;
-            color: var(--text-dark);
+            margin-bottom: 10px;
+            color: var(--primary-green);
             font-weight: 700;
             font-size: 15px;
+            letter-spacing: 0.3px;
+            border-right: 4px solid var(--primary-gold);
+            padding-right: 12px;
+            text-shadow: 0 1px 1px rgba(255,255,255,0.8);
         }
 
         .form-group input, 
         .form-group select {
             width: 100%;
-            padding: 14px 16px;
-            border: 2px solid #e8ece9;
-            border-radius: 10px;
+            padding: 15px 18px;
+            border: 2px solid #e0d9cc;
+            border-radius: 14px;
             font-size: 15px;
             font-family: 'Cairo', sans-serif;
-            transition: all 0.3s ease;
-            background-color: #f9fbf9;
+            transition: all 0.35s ease;
+            background-color: #fefcf9;
             color: var(--text-dark);
+            box-shadow: inset 0 2px 6px rgba(0, 0, 0, 0.02);
+            font-weight: 500;
         }
 
+        /* Custom styling for date input */
         .form-group input[type="date"] {
             appearance: none;
             -webkit-appearance: none;
+            color: var(--text-dark);
         }
 
         .form-group input:focus, 
         .form-group select:focus {
-            border-color: var(--primary-green);
+            border-color: var(--primary-gold);
             background-color: #fff;
             outline: none;
-            box-shadow: 0 0 0 4px rgba(26, 60, 45, 0.1);
+            box-shadow: 0 0 0 5px rgba(197, 155, 75, 0.15), inset 0 2px 6px rgba(0, 0, 0, 0.02);
+            transform: scale(1.005);
         }
 
         .form-group input::placeholder {
-            color: #a0b0a8;
+            color: #b9aea0;
+            font-weight: 400;
+        }
+
+        /* SELECT CUSTOM ARROW */
+        .form-group select {
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='16' height='16' viewBox='0 0 24 24' fill='none' stroke='%23c59b4b' stroke-width='3' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'%3E%3C/polyline%3E%3C/svg%3E");
+            background-repeat: no-repeat;
+            background-position: left 18px center;
+            background-size: 16px;
+            padding-left: 48px;
         }
 
         .submit-btn {
-            background: linear-gradient(135deg, var(--primary-red) 0%, #b71c1c 100%);
-            color: white;
-            border: none;
+            background: linear-gradient(135deg, var(--primary-green) 0%, #1f4f38 100%);
+            color: #f5e7c8;
+            border: 2px solid var(--primary-gold);
             width: 100%;
-            padding: 16px;
-            font-size: 18px;
-            font-weight: 700;
-            border-radius: 10px;
+            padding: 18px;
+            font-size: 19px;
+            font-weight: 800;
+            border-radius: 50px;
             cursor: pointer;
-            transition: all 0.3s ease;
-            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.25);
+            transition: all 0.4s cubic-bezier(0.2, 0.9, 0.3, 1);
+            box-shadow: 0 12px 25px -8px rgba(15, 46, 31, 0.5), 0 0 0 1px rgba(197, 155, 75, 0.3);
             margin-top: 15px;
             position: relative;
             overflow: hidden;
+            letter-spacing: 0.8px;
+            text-shadow: 0 1px 2px rgba(0,0,0,0.2);
+            font-family: 'Cairo', sans-serif;
         }
 
         .submit-btn::after {
             content: '';
             position: absolute;
-            top: 0; left: -100%; width: 100%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: all 0.5s ease;
+            top: -50%; left: -60%; width: 200%; height: 200%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.2) 0%, transparent 70%);
+            opacity: 0;
+            transition: opacity 0.5s ease;
+            transform: rotate(25deg);
+            pointer-events: none;
         }
 
         .submit-btn:hover {
-            background: linear-gradient(135deg, #b71c1c 0%, #8e0000 100%);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.35);
+            background: linear-gradient(135deg, var(--primary-red) 0%, #8b1a1a 100%);
+            border-color: var(--gold-light);
+            transform: translateY(-3px);
+            box-shadow: 0 18px 30px -8px rgba(178, 34, 34, 0.5), 0 0 0 2px rgba(197, 155, 75, 0.5);
+            color: #fff7e6;
         }
 
         .submit-btn:hover::after {
+            opacity: 1;
             left: 100%;
+            transition: left 0.6s ease, opacity 0.4s ease;
         }
 
         .submit-btn:active {
-            transform: translateY(0);
+            transform: translateY(1px);
+            box-shadow: 0 6px 15px -4px rgba(15, 46, 31, 0.5);
         }
 
-        @media (max-width: 480px) {
+        /* TUNISIAN FLAIR: small decorative elements */
+        .form-group:last-of-type {
+            margin-bottom: 12px;
+        }
+
+        /* subtle gold star separator between sections */
+        .form-group:not(:last-child)::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 2px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+            margin: 22px auto 0;
+            opacity: 0.4;
+        }
+
+        /* --- LUXURY & TUNISIAN DETAILS: ORNAMENTAL TOP & BOTTOM --- */
+        .container .header::before {
+            content: '✧';
+            position: absolute;
+            top: 20px;
+            left: 30px;
+            font-size: 24px;
+            color: var(--primary-gold);
+            opacity: 0.4;
+            transform: rotate(15deg);
+        }
+
+        .container .header::after {
+            content: '✦ ✦ ✦';
+            position: absolute;
+            bottom: -11px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: #ffffff;
+            padding: 0 25px;
+            color: var(--primary-gold);
+            font-size: 16px;
+            letter-spacing: 8px;
+            text-shadow: 0 2px 4px rgba(197, 155, 75, 0.2);
+        }
+
+        /* Responsive adjustments */
+        @media (max-width: 520px) {
+            .container {
+                border-radius: 18px;
+            }
             .form-body {
-                padding: 20px;
+                padding: 25px 22px 35px;
             }
             .header {
-                padding: 25px 15px 15px;
+                padding: 35px 20px 20px;
             }
             .header h1 {
-                font-size: 22px;
+                font-size: 24px;
+            }
+            .header h2 {
+                font-size: 15px;
             }
             .header img {
-                max-width: 190px;
+                max-width: 170px;
             }
-            .container {
-                border-radius: 10px;
+            .form-group label {
+                font-size: 14px;
+                border-right-width: 3px;
             }
+            .submit-btn {
+                font-size: 17px;
+                padding: 16px;
+            }
+            .container::before,
+            .container::after {
+                width: 70px;
+                height: 70px;
+                opacity: 0.2;
+            }
+        }
+
+        @media (max-width: 380px) {
+            .header h1 {
+                font-size: 20px;
+            }
+            .header img {
+                max-width: 140px;
+            }
+            .form-body {
+                padding: 20px 16px 30px;
+            }
+        }
+
+        /* RTL specific fine-tuning */
+        .form-group label {
+            padding-right: 12px;
+            padding-left: 0;
         }
     </style>
 </head>
@@ -227,16 +417,21 @@
 
     <div class="container">
         <div class="header">
+            <!-- Make sure your image is named 'scout-logo.jpg' and in the same folder -->
             <img src="scout-logo.jpg" alt="شعار فوج الحدائق للكشافة التونسية">
             <h1>استمارة تسجيل انخراط</h1>
             <h2>فوج الحدائق للكشافة التونسية</h2>
         </div>
 
         <div class="form-body">
+            <!-- FormSubmit Action -->
             <form action="https://formsubmit.co/alhadeyk.scout@gmail.com" method="POST">
                 
+                <!-- FormSubmit Configuration Options -->
                 <input type="hidden" name="_captcha" value="false">
                 <input type="hidden" name="_subject" value="طلب انخراط جديد - فوج الحدائق">
+                <!-- Optional: Redirect to a thank you page after submission. Replace with your URL. -->
+                <!-- <input type="hidden" name="_next" value="https://yourwebsite.com/thankyou.html"> -->
 
                 <div class="form-group">
                     <label for="fullname">الاسم واللقب الكامل *</label>
