@@ -453,7 +453,7 @@
         }
 
         .ai-chat-window {
-            width: 380px;
+            width: 400px;
             max-width: calc(100vw - 60px);
             background: #fff;
             border-radius: 22px;
@@ -554,7 +554,7 @@
             box-shadow: 0 2px 8px rgba(15,46,31,0.15);
         }
 
-        /* Quick replies area — replaces text bar */
+        /* Quick replies — no text bar */
         .ai-quick-replies {
             display: flex;
             flex-wrap: wrap;
@@ -562,7 +562,7 @@
             padding: 15px 18px 18px;
             background: #fff;
             border-top: 1px solid #eee5d5;
-            max-height: 180px;
+            max-height: 220px;
             overflow-y: auto;
         }
 
@@ -635,7 +635,7 @@
             .form-group label { font-size: 14px; border-right-width: 3px; }
             .submit-btn { font-size: 17px; padding: 16px; }
             .container::before, .container::after { width: 70px; height: 70px; opacity: 0.2; }
-            .ai-chat-window { width: 340px; }
+            .ai-chat-window { width: 360px; }
             .ai-assistant { bottom: 20px; left: 20px; }
             .site-header h1 { font-size: 1.7rem; }
             .location-badge { font-size: 13px; padding: 6px 16px; }
@@ -645,10 +645,10 @@
             .header h1 { font-size: 20px; }
             .header img { max-width: 130px; }
             .form-body { padding: 20px 16px 30px; }
-            .ai-chat-window { width: 300px; }
+            .ai-chat-window { width: 320px; }
             .site-header h1 { font-size: 1.4rem; }
             .site-header .scout-logo-small img { width: 45px; height: 45px; }
-            .ai-quick-replies button { font-size: 12px; padding: 7px 12px; }
+            .ai-quick-replies button { font-size: 11px; padding: 7px 12px; }
         }
     </style>
 </head>
@@ -663,7 +663,7 @@
             <p>انخرط معنا وكن جزءاً من العائلة الكشفية</p>
             <div class="location-badge">
                 <i class="fas fa-map-marker-alt"></i>
-                صفاقس - حي jardin (الحدائق)
+                صفاقس - حي الحدائق
             </div>
         </header>
 
@@ -673,14 +673,14 @@
                 <h1>استمارة تسجيل انخراط</h1>
                 <h2>فوج الحدائق للكشافة التونسية</h2>
                 <div class="city-tag">
-                    <i class="fas fa-map-pin"></i> صفاقس - حي jardin
+                    <i class="fas fa-map-pin"></i> صفاقس - حي الحدائق
                 </div>
             </div>
 
             <div class="form-body">
                 <form action="https://formsubmit.co/alhadeyk.scout@gmail.com" method="POST">
                     <input type="hidden" name="_captcha" value="false">
-                    <input type="hidden" name="_subject" value="طلب انخراط جديد - فوج الحدائق - صفاقس">
+                    <input type="hidden" name="_subject" value="طلب انخراط جديد - فوج الحدائق - صفاقس - حي الحدائق">
 
                     <div class="form-group">
                         <label for="fullname">الاسم واللقب الكامل *</label>
@@ -724,7 +724,7 @@
         </div>
     </div>
 
-    <!-- ========== AI ASSISTANT WIDGET (no text bar) ========== -->
+    <!-- ========== AI ASSISTANT (NO TEXT BAR — ONLY BUTTONS) ========== -->
     <div class="ai-assistant">
         <div class="ai-chat-window" id="aiChatWindow">
             <div class="ai-header">
@@ -732,13 +732,8 @@
                 <span>مساعد الانخراط الذكي</span>
                 <button class="ai-close" id="aiCloseBtn"><i class="fas fa-times"></i></button>
             </div>
-            <div class="ai-messages" id="aiMessages">
-                <!-- Messages injected by JS -->
-            </div>
-            <div class="ai-quick-replies" id="aiQuickReplies">
-                <div class="replies-label"><i class="fas fa-lightbulb"></i> اختر سؤالاً:</div>
-                <!-- Questions rendered by JS -->
-            </div>
+            <div class="ai-messages" id="aiMessages"></div>
+            <div class="ai-quick-replies" id="aiQuickReplies"></div>
         </div>
         <div class="ai-toggle" id="aiToggleBtn">
             <i class="fas fa-robot"></i>
@@ -754,25 +749,25 @@
             const aiMessages = document.getElementById('aiMessages');
             const quickRepliesContainer = document.getElementById('aiQuickReplies');
 
-            // ---------- KNOWLEDGE BASE (Sfax Cite Jardin specific) ----------
+            // ---------- INTELLIGENT KNOWLEDGE BASE (Arabic only, 7ay Al Hadeya9) ----------
             const knowledgeBase = [
                 {
                     id: 'stages',
                     question: 'ما هي المراحل الكشفية؟',
                     icon: 'fa-layer-group',
-                    answer: 'المراحل الكشفية في فوج الحدائق (صفاقس - حي jardin):\n🔹 الأشبال: 7 - 11 سنة\n🔹 الكشافة: 12 - 15 سنة\n🔹 الجوالة: 16 - 18 سنة\n🔹 القادة والمسؤولين: 18+ سنة\nاختر المرحلة المناسبة لعمرك في الاستمارة.'
+                    answer: 'المراحل الكشفية في فوج الحدائق (صفاقس - حي الحدائق):\n🔹 الأشبال: من 7 إلى 11 سنة\n🔹 الكشافة: من 12 إلى 15 سنة\n🔹 الجوالة: من 16 إلى 18 سنة\n🔹 القادة والمسؤولين: 18 سنة فما فوق\n\nاختر المرحلة المناسبة لعمرك في الاستمارة.'
                 },
                 {
                     id: 'register',
                     question: 'كيف أسجل في الفوج؟',
                     icon: 'fa-edit',
-                    answer: 'للتسجيل في فوج الحدائق للكشافة التونسية (صفاقس - حي jardin):\n1️⃣ املأ الاستمارة بالاسم الكامل وتاريخ الولادة.\n2️⃣ أدخل رقم هاتفك.\n3️⃣ اختر المرحلة الكشفية.\n4️⃣ اضغط "إرسال طلب الانخراط".\nسنتواصل معك خلال 48 ساعة. ✨'
+                    answer: 'للتسجيل في فوج الحدائق للكشافة التونسية (صفاقس - حي الحدائق):\n1️⃣ املأ الاستمارة بالاسم الكامل وتاريخ الولادة.\n2️⃣ أدخل رقم هاتفك.\n3️⃣ اختر المرحلة الكشفية.\n4️⃣ اضغط "إرسال طلب الانخراط".\n\nسنتواصل معك خلال 48 ساعة. ✨'
                 },
                 {
                     id: 'location',
-                    question: 'أين يقع مقر الفوج؟',
+                    question: 'أين يقع مقر الفوج بالضبط؟',
                     icon: 'fa-map-marker-alt',
-                    answer: 'مقر فوج الحدائق للكشافة التونسية يقع في:\n📍 مدينة صفاقس - حي jardin (الحدائق)\n\nنستقبل الأعضاء الجدد أسبوعياً يوم السبت من 14:00 إلى 17:00.'
+                    answer: 'مقر فوج الحدائق للكشافة التونسية يقع في:\n📍 مدينة صفاقس - حي الحدائق\n\nنستقبل الأعضاء الجدد أسبوعياً يوم السبت من الساعة 14:00 إلى 17:00.\nيمكنك زيارة المقر للتعرف على الفوج.'
                 },
                 {
                     id: 'age',
@@ -782,27 +777,27 @@
                 },
                 {
                     id: 'schedule',
-                    question: 'ما هي أوقات الأنشطة؟',
+                    question: 'ما هي أوقات الأنشطة الأسبوعية؟',
                     icon: 'fa-clock',
-                    answer: '⏰ أوقات الأنشطة الأسبوعية:\n• السبت: 14:00 - 17:00 (جميع المراحل)\n• الأحد: 9:00 - 12:00 (الجوالة والقادة)\n\nخلال العطل المدرسية ننظم مخيمات ورحلات خاصة. 🏕️'
+                    answer: '⏰ أوقات الأنشطة الأسبوعية:\n• السبت: من 14:00 إلى 17:00 (جميع المراحل)\n• الأحد: من 9:00 إلى 12:00 (الجوالة والقادة)\n\nخلال العطل المدرسية ننظم مخيمات ورحلات خاصة. 🏕️'
                 },
                 {
                     id: 'fees',
                     question: 'هل هناك رسوم انخراط؟',
                     icon: 'fa-coins',
-                    answer: 'رسوم الانخراط السنوية رمزية جداً (تغطي التأمين، الوشاح، والأنشطة).\nللاستفسار عن المبلغ الدقيق، يرجى التواصل مع إدارة الفوج في مقر صفاقس - حي jardin أو عبر البريد.'
+                    answer: 'رسوم الانخراط السنوية رمزية جداً وتغطي:\n• التأمين\n• الوشاح الكشفي\n• الأنشطة والمخيمات\n\nللاستفسار عن المبلغ الدقيق، يرجى التواصل مع إدارة الفوج في مقر صفاقس - حي الحدائق أو عبر البريد الإلكتروني.'
                 },
                 {
                     id: 'activities',
                     question: 'ما هي الأنشطة التي تقومون بها؟',
                     icon: 'fa-hiking',
-                    answer: 'أنشطتنا في فوج الحدائق (صفاقس):\n🌲 مخيمات كشفية\n🔥 ورشات مهارات (حبال، إسعاف، طبخ)\n🗺️ رحلات استكشافية\n🎯 ألعاب جماعية ومسابقات\n🎨 أنشطة فنية وثقافية\n\nكلها تحت إشراف قادة مؤهلين.'
+                    answer: 'أنشطتنا في فوج الحدائق (صفاقس - حي الحدائق):\n🌲 مخيمات كشفية صيفية وشتوية\n🔥 ورشات مهارات (حبال، إسعاف، طبخ)\n🗺️ رحلات استكشافية\n🎯 ألعاب جماعية ومسابقات\n🎨 أنشطة فنية وثقافية\n\nكلها تحت إشراف قادة مؤهلين.'
                 },
                 {
                     id: 'contact',
                     question: 'كيف أتواصل معكم؟',
                     icon: 'fa-address-book',
-                    answer: '📧 البريد: alhadeyk.scout@gmail.com\n📍 المقر: صفاقس - حي jardin\n📞 سنوفر رقم الهاتف بعد إرسال الاستمارة.\n\nيمكنك أيضاً زيارة مقرنا أيام السبت.'
+                    answer: '📧 البريد الإلكتروني: alhadeyk.scout@gmail.com\n📍 المقر: صفاقس - حي الحدائق\n📞 سنوفر رقم الهاتف بعد إرسال الاستمارة.\n\nيمكنك أيضاً زيارة مقرنا أيام السبت من 14:00 إلى 17:00.'
                 },
                 {
                     id: 'uniform',
@@ -820,7 +815,55 @@
                     id: 'sfax_details',
                     question: 'ما يميز فوج الحدائق في صفاقس؟',
                     icon: 'fa-star',
-                    answer: 'فوج الحدائق بصفاقس - حي jardin يتميز بـ:\n✅ قادة ذوو خبرة عالية\n✅ أنشطة أسبوعية منتظمة\n✅ مخيمات صيفية وشتوية\n✅ تعليم المهارات الحياتية\n✅ روح العائلة الكشفية\n\nانضم إلينا وكن جزءاً من التاريخ! ⚜️'
+                    answer: 'فوج الحدائق بصفاقس - حي الحدائق يتميز بـ:\n✅ قادة ذوو خبرة عالية\n✅ أنشطة أسبوعية منتظمة\n✅ مخيمات صيفية وشتوية\n✅ تعليم المهارات الحياتية\n✅ روح العائلة الكشفية\n\nانضم إلينا وكن جزءاً من التاريخ! ⚜️'
+                },
+                {
+                    id: 'history',
+                    question: 'ما هو تاريخ تأسيس الفوج؟',
+                    icon: 'fa-history',
+                    answer: 'تأسس فوج الحدائق للكشافة التونسية في صفاقس - حي الحدائق منذ سنوات عديدة، وله تاريخ حافل في تخريج أجيال من القادة الكشفيين.\n\nنحن فخورون بجذورنا في حي الحدائق وبمساهمتنا في خدمة المجتمع الصفاقسي.'
+                },
+                {
+                    id: 'parents',
+                    question: 'هل يمكن للوالدين حضور الأنشطة؟',
+                    icon: 'fa-users',
+                    answer: 'نعم، الوالدين مرحب بهم لحضور الأنشطة المفتوحة والمناسبات الخاصة مثل:\n• حفلات الافتتاح والختام\n• المخيمات العائلية\n• أيام الأبواب المفتوحة\n\nنؤمن بأهمية مشاركة العائلة في الرحلة الكشفية.'
+                },
+                {
+                    id: 'safety',
+                    question: 'كيف تضمنون سلامة الأطفال؟',
+                    icon: 'fa-shield-alt',
+                    answer: 'سلامة أبنائكم أولويتنا القصوى:\n🛡️ جميع القادة مدربون على الإسعافات الأولية\n🛡️ إشراف دائم طوال الأنشطة\n🛡️ تأمين شامل لجميع الأعضاء\n🛡️ بروتوكولات أمان صارمة في المخيمات\n🛡️ تواصل مستمر مع الوالدين'
+                },
+                {
+                    id: 'skills',
+                    question: 'ما هي المهارات التي سيتعلمها ابني؟',
+                    icon: 'fa-graduation-cap',
+                    answer: 'في فوج الحدائق يتعلم الأعضاء:\n🎯 القيادة والاعتماد على النفس\n🤝 العمل الجماعي والتعاون\n🌿 حب الطبيعة والحفاظ عليها\n🧗 المهارات الكشفية (عقد، إسعاف، توجيه)\n🗣️ التواصل والثقة بالنفس\n❤️ المواطنة والخدمة المجتمعية'
+                },
+                {
+                    id: 'beginners',
+                    question: 'هل هناك برنامج خاص للمبتدئين؟',
+                    icon: 'fa-seedling',
+                    answer: 'نعم، الأعضاء الجدد يمرون بمرحلة تأهيل تشمل:\n• التعرف على القوانين الكشفية\n• تعلم التحية والشعار\n• أنشطة كشفية تمهيدية\n• دمج تدريجي مع المجموعة\n\nالهدف هو الاندماج السلس والممتع. 🌱'
+                },
+                {
+                    id: 'camps',
+                    question: 'هل تنظمون مخيمات صيفية؟',
+                    icon: 'fa-campground',
+                    answer: 'نعم! ننظم:\n☀️ مخيم صيفي سنوي (يوليو - أغسطس)\n❄️ مخيم شتوي (ديسمبر)\n🌸 مخيمات نهاية الأسبوع خلال العطل\n\nالمخيمات تشمل أنشطة متنوعة وزيارات ثقافية وترفيهية.'
+                },
+                {
+                    id: 'volunteer',
+                    question: 'هل يمكنني التطوع كقائد؟',
+                    icon: 'fa-hands-helping',
+                    answer: 'نرحب دائماً بالمتطوعين الجدد للانضمام كقادة!\n\nالشروط:\n• السن 18 سنة فما فوق\n• اجتياز فترة تدريب\n• الالتزام بالأنشطة الأسبوعية\n\nللتقديم، تواصل معنا عبر البريد أو زيارة المقر.'
+                },
+                {
+                    id: 'neighborhood',
+                    question: 'هل الفوج مفتوح لكل أحياء صفاقس؟',
+                    icon: 'fa-city',
+                    answer: 'نعم، فوج الحدائق مفتوح لجميع أبناء صفاقس والمناطق المجاورة.\n\nمقرنا في حي الحدائق، لكننا نرحب بالأعضاء من كل الأحياء:\n• حي الحدائق\n• المدينة\n• سكرة\n• طريق تنيور\n• وغيرها من أحياء صفاقس'
                 },
                 {
                     id: 'thanks',
@@ -832,7 +875,6 @@
 
             // ---------- RENDER QUICK REPLY BUTTONS ----------
             function renderQuickReplies() {
-                // Keep the label
                 quickRepliesContainer.innerHTML = '<div class="replies-label"><i class="fas fa-lightbulb"></i> اختر سؤالاً:</div>';
                 knowledgeBase.forEach(item => {
                     const btn = document.createElement('button');
@@ -856,10 +898,8 @@
                 const item = knowledgeBase.find(q => q.id === id);
                 if (!item) return;
 
-                // Add user message (the question)
                 addMessage(`❓ ${item.question}`, 'user');
 
-                // Add bot answer after short delay
                 setTimeout(() => {
                     addMessage(item.answer, 'bot');
                 }, 350);
@@ -874,7 +914,6 @@
                 aiWindow.classList.remove('active');
             });
 
-            // Use event delegation for quick reply buttons
             quickRepliesContainer.addEventListener('click', (e) => {
                 const btn = e.target.closest('button');
                 if (!btn) return;
@@ -885,10 +924,9 @@
             // ---------- INIT ----------
             renderQuickReplies();
 
-            // Welcome message
             window.addEventListener('load', () => {
                 setTimeout(() => {
-                    addMessage('مرحباً بك في فوج الحدائق للكشافة التونسية - صفاقس (حي jardin)! 🏕️\nاختر أحد الأسئلة أدناه لمساعدتك في الانخراط.', 'bot');
+                    addMessage('مرحباً بك في فوج الحدائق للكشافة التونسية - صفاقس (حي الحدائق)! 🏕️\nاختر أحد الأسئلة أدناه لمساعدتك في الانخراط.', 'bot');
                 }, 500);
             });
 
