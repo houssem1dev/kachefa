@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تسجيل انخراط - فوج الحدائق للكشافة التونسية</title>
+    <link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;700;900&display=swap" rel="stylesheet">
+    
+    <style>
+        :root {
+            --primary-green: #1a3c2d;
+            --primary-red: #d32f2f;
+            --primary-gold: #c59b4b;
+            --bg-light-green: #eaf2ec;
+            --bg-sand: #fdfbf7;
+            --text-dark: #2c3e35;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Cairo', sans-serif;
+        }
+
+        html, body {
+            width: 100%;
+            min-height: 100%;
+        }
+
+        body {
+            background-color: #eaf2ec;
+            background-image: 
+                radial-gradient(circle at 15% 50%, rgba(26, 60, 45, 0.08) 0%, transparent 45%),
+                radial-gradient(circle at 85% 30%, rgba(197, 155, 75, 0.10) 0%, transparent 45%),
+                linear-gradient(135deg, #fdfbf7 0%, #eaf2ec 100%);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-attachment: fixed;
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+            position: relative;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-image: radial-gradient(#1a3c2d 1px, transparent 1px);
+            background-size: 30px 30px;
+            opacity: 0.05;
+            pointer-events: none;
+            z-index: 0;
+        }
+
+        .container {
+            background-color: #ffffff;
+            width: 100%;
+            max-width: 600px;
+            border-radius: 15px;
+            box-shadow: 0 20px 40px rgba(26, 60, 45, 0.15), 0 5px 15px rgba(0, 0, 0, 0.05);
+            overflow: hidden;
+            position: relative;
+            z-index: 1;
+            border-top: 8px solid var(--primary-green);
+            border-bottom: 4px solid var(--primary-gold);
+        }
+
+        .header {
+            text-align: center;
+            padding: 35px 20px 15px;
+            background-color: #fff;
+            position: relative;
+        }
+
+        .header::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80%;
+            height: 1px;
+            background: linear-gradient(90deg, transparent, var(--primary-gold), transparent);
+            opacity: 0.5;
+        }
+
+        .header img {
+            max-width: 230px;
+            height: auto;
+            margin-bottom: 20px;
+            filter: drop-shadow(0px 8px 15px rgba(0,0,0,0.12));
+            transition: transform 0.3s ease;
+        }
+
+        .header img:hover {
+            transform: scale(1.02);
+        }
+
+        .header h1 {
+            color: var(--primary-green);
+            font-size: 26px;
+            font-weight: 900;
+            margin-bottom: 5px;
+        }
+
+        .header h2 {
+            color: var(--primary-gold);
+            font-size: 16px;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+        }
+
+        .form-body {
+            padding: 30px 40px 40px;
+            background-color: #ffffff;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+            position: relative;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            color: var(--text-dark);
+            font-weight: 700;
+            font-size: 15px;
+        }
+
+        .form-group input, 
+        .form-group select {
+            width: 100%;
+            padding: 14px 16px;
+            border: 2px solid #e8ece9;
+            border-radius: 10px;
+            font-size: 15px;
+            font-family: 'Cairo', sans-serif;
+            transition: all 0.3s ease;
+            background-color: #f9fbf9;
+            color: var(--text-dark);
+        }
+
+        .form-group input[type="date"] {
+            appearance: none;
+            -webkit-appearance: none;
+        }
+
+        .form-group input:focus, 
+        .form-group select:focus {
+            border-color: var(--primary-green);
+            background-color: #fff;
+            outline: none;
+            box-shadow: 0 0 0 4px rgba(26, 60, 45, 0.1);
+        }
+
+        .form-group input::placeholder {
+            color: #a0b0a8;
+        }
+
+        .submit-btn {
+            background: linear-gradient(135deg, var(--primary-red) 0%, #b71c1c 100%);
+            color: white;
+            border: none;
+            width: 100%;
+            padding: 16px;
+            font-size: 18px;
+            font-weight: 700;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 6px 20px rgba(211, 47, 47, 0.25);
+            margin-top: 15px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .submit-btn::after {
+            content: '';
+            position: absolute;
+            top: 0; left: -100%; width: 100%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+        }
+
+        .submit-btn:hover {
+            background: linear-gradient(135deg, #b71c1c 0%, #8e0000 100%);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(211, 47, 47, 0.35);
+        }
+
+        .submit-btn:hover::after {
+            left: 100%;
+        }
+
+        .submit-btn:active {
+            transform: translateY(0);
+        }
+
+        @media (max-width: 480px) {
+            .form-body {
+                padding: 20px;
+            }
+            .header {
+                padding: 25px 15px 15px;
+            }
+            .header h1 {
+                font-size: 22px;
+            }
+            .header img {
+                max-width: 190px;
+            }
+            .container {
+                border-radius: 10px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <div class="header">
+            <img src="scout-logo.jpg" alt="شعار فوج الحدائق للكشافة التونسية">
+            <h1>استمارة تسجيل انخراط</h1>
+            <h2>فوج الحدائق للكشافة التونسية</h2>
+        </div>
+
+        <div class="form-body">
+            <form action="https://formsubmit.co/alhadeyk.scout@gmail.com" method="POST">
+                
+                <input type="hidden" name="_captcha" value="false">
+                <input type="hidden" name="_subject" value="طلب انخراط جديد - فوج الحدائق">
+
+                <div class="form-group">
+                    <label for="fullname">الاسم واللقب الكامل *</label>
+                    <input type="text" id="fullname" name="الاسم_الكامل" placeholder="أدخل اسمك ولقبك هنا" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="birthdate">تاريخ الولادة *</label>
+                    <input type="date" id="birthdate" name="تاريخ_الولادة" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="phone">رقم الهاتف *</label>
+                    <input type="tel" id="phone" name="رقم_الهاتف" placeholder="مثال: 12345678" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">البريد الإلكتروني (اختياري)</label>
+                    <input type="email" id="email" name="البريد_الإلكتروني" placeholder="example@email.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="section">المرحلة الكشفية المرغوبة *</label>
+                    <select id="section" name="المرحلة_الكشفية" required>
+                        <option value="" disabled selected>اختر المرحلة...</option>
+                        <option value="أشبال">أشبال (7 - 11 سنة)</option>
+                        <option value="كشافة">كشافة (12 - 15 سنة)</option>
+                        <option value="جوالة">جوالة (16 - 18 سنة)</option>
+                        <option value="قادة">قادة / مسؤولين</option>
+                    </select>
+                </div>
+
+                <div class="form-group">
+                    <label for="notes">ملاحظات إضافية أو حالة صحية خاصة</label>
+                    <input type="text" id="notes" name="ملاحظات" placeholder="أدخل أي معلومات تود إضافتها">
+                </div>
+
+                <button type="submit" class="submit-btn">إرسال طلب الانخراط</button>
+            </form>
+        </div>
+    </div>
+
+</body>
+</html>
